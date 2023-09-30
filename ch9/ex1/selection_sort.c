@@ -1,13 +1,16 @@
 #include<stdio.h>
 #include<stdbool.h>
 
-#define MAX_NUMS 5
-
 void selection_sort(int n, int array[n]);
 
 int main(void) 
 {
-	int nums[MAX_NUMS];
+	int max_nums;
+
+	printf("How many numbers will you enter? ");
+	scanf("%d", &max_nums);
+
+	int nums[max_nums];
 
 	int cur_num = 0;
 
@@ -20,12 +23,13 @@ int main(void)
 		nums[cur_num] = num;
 
 		cur_num++;
-	} while (cur_num < MAX_NUMS);
+	} while (cur_num < max_nums);
 
-	selection_sort(cur_num + 1, nums);
+	selection_sort(cur_num, nums);
 
-	for(int i = 0; i < cur_num + 1; i++) {
-		printf("Sorted numbers:\n");
+	printf("Sorted numbers:\n");
+
+	for(int i = 0; i < cur_num; i++) {
 		printf("%d,", nums[i]);
 	}
 
@@ -45,12 +49,14 @@ void selection_sort(int n, int array[n]) {
 
 	int largest_el_value = array[largest_el_idx];
 
-	for(int i = n - 1; i > largest_el_idx; i--) {
-		array[i-1] = array[i];
+	for(int i = largest_el_idx; i < n - 1; i++) {
+		array[i] = array[i+1];
 	}
 
 	array[n - 1] = largest_el_value;
 
-	selection_sort(n-1, array);
+	if (n > 1) {
+		selection_sort(n-1, array);
+	}
 }
 
