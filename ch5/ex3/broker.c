@@ -1,8 +1,10 @@
 #include <stdio.h>
 
+#define RIVAL_BASE_COMMISSION 33.0f
+
 int main(void) 
 {
-	float commission, price_per_share, trade_value;
+	float commission, price_per_share, trade_value, rival_commission;
 	int num_shares;
 
 	printf("Enter number of shares: ");
@@ -31,7 +33,14 @@ int main(void)
 		commission = 39.00f;
 	}
 
+	if (num_shares < 2000) {
+		rival_commission = RIVAL_BASE_COMMISSION + 0.03f * num_shares;
+	} else {
+		rival_commission = RIVAL_BASE_COMMISSION + 0.02f * num_shares;
+	}
+
 	printf("Commission: $%.2f\n", commission);
+	printf("Rival commission: $%.2f\n", rival_commission);
 
 	return 0;
 }
